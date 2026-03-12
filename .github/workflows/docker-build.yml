@@ -20,9 +20,12 @@ jobs:
       - name: Build Docker image
         run: docker build -t qr-code-generator-app .
 
+      - name: Create output directory
+        run: mkdir -p qr_codes
+
       - name: Run QR code generator
         run: |
-          docker run --rm -v ${{ github.workspace }}/qr_codes:/app/qr_codes qr-code-generator-app --url https://github.com/thejps92
+          docker run --rm -v ${{ github.workspace }}/qr_codes:/app/qr_codes --user root qr-code-generator-app --url https://github.com/thejps92
 
       - name: Verify QR code was generated
         run: |
