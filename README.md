@@ -16,25 +16,19 @@ A Python-based QR code generator that runs inside a Docker container. It takes a
 
 ## Quick Start
 
-### Using Docker Compose
-
-```bash
-docker compose up --build
-```
-
-This builds the image and generates a QR code. The output `.png` file will appear in the `qr_codes/` folder.
-
 ### Using Docker Run
 
 ```bash
 docker build -t qr-code-generator-app .
-docker run --rm -v "${PWD}/qr_codes:/app/qr_codes" qr-code-generator-app
+docker run -d --name qr-generator -v "${PWD}/qr_codes:/app/qr_codes" qr-code-generator-app
 ```
+
+This builds the image and generates a QR code. The output `.png` file will appear in the `qr_codes/` folder.
 
 ### Custom URL
 
 ```bash
-docker run --rm -v "${PWD}/qr_codes:/app/qr_codes" qr-code-generator-app --url https://www.njit.edu
+docker run -d --name qr-generator -v "${PWD}/qr_codes:/app/qr_codes" qr-code-generator-app --url https://www.njit.edu
 ```
 
 ## Environment Variables
